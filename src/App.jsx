@@ -106,6 +106,11 @@ function App() {
                 <option value="25">C25/30</option>
                 <option value="30">C30/37</option>
               </select>
+              <span
+                style={{ fontSize: "11px", color: "#64748b", marginTop: "4px" }}
+              >
+                Design Strength (fcd): {(inputs.fck / 1.5).toFixed(2)} MPa
+              </span>
             </div>
 
             <div style={styles.field}>
