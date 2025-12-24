@@ -12,7 +12,7 @@ function App() {
     phi: 16,
     fyk: 500,
     vsd: 50,
-    col_a: 400, // Column width (mm) - ለPunching shear ያስፈልጋል
+    col_a: 400, // Column width (mm)
     col_b: 400, // Column depth (mm)
   });
 
@@ -36,7 +36,6 @@ function App() {
     const d = totalH - cover - phi / 2;
     const fcd = fck / 1.5;
 
-    // Reinforcement Calculation (As per Excel)
     const msdX_per_m = msdx / (l / 1000);
     const msd_norm_X = (msdX_per_m * 1000000) / (fcd * 1000 * Math.pow(d, 2));
     let kzX = msd_norm_X > 0.04 ? 0.976 : 0.978;
@@ -47,16 +46,12 @@ function App() {
     let kzY = msd_norm_Y > 0.04 ? 0.976 : 0.978;
     const asY = (msdy * 1000000) / (0.87 * fyk * kzY * d);
 
-    // --- SHEAR CHECKS (ከኤክሴሉ ፎርሙላ የተወሰደ) ---
     const k = Math.min(1 + Math.sqrt(200 / d), 2.0);
     const rho = Math.min(asX / (b * d), 0.02);
-    const vrd_c = 0.12 * k * Math.pow(100 * rho * fck, 1 / 3); // Concrete capacity
+    const vrd_c = 0.12 * k * Math.pow(100 * rho * fck, 1 / 3);
 
-    // 1. Wide Beam Shear (at d from column face)
     const v_wideBeam = (vsd * 1000) / (b * d);
-
-    // 2. Punching Shear (at 2d from column face)
-    const u1 = 2 * (col_a + col_b) + 2 * Math.PI * (2 * d); // Perimeter
+    const u1 = 2 * (col_a + col_b) + 2 * Math.PI * (2 * d);
     const v_punching = (vsd * 1000) / (u1 * d);
 
     setResults({
@@ -165,7 +160,7 @@ function App() {
                   name="col_a"
                   value={inputs.col_a}
                   onChange={handleChange}
-                  style={{ ...styles.inputBox, flex: 1 }}
+                  style={{ ...styles.inputBox, flex: 1, minWidth: "0" }}
                   placeholder="a"
                 />
                 <input
@@ -173,7 +168,7 @@ function App() {
                   name="col_b"
                   value={inputs.col_b}
                   onChange={handleChange}
-                  style={{ ...styles.inputBox, flex: 1 }}
+                  style={{ ...styles.inputBox, flex: 1, minWidth: "0" }}
                   placeholder="b"
                 />
               </div>
@@ -275,17 +270,20 @@ const styles = {
   },
   mainContainer: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(420px, 1fr))",
+    // እዚህ ጋር ብቻ ነው ማስተካከያ ያደረግኩት (ከ 420px ወደ 300px)
+    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
     gap: "30px",
     maxWidth: "1200px",
     margin: "0 auto",
     padding: "0 20px",
+    boxSizing: "border-box",
   },
   panel: {
     backgroundColor: "#ffffff",
     borderRadius: "20px",
     padding: "35px",
     boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)",
+    boxSizing: "border-box", // ሞባይል ላይ ከዳር እንዳይወጣ
   },
   panelHeader: {
     display: "flex",
@@ -312,6 +310,8 @@ const styles = {
     fontSize: "1.1rem",
     color: "#1e293b",
     backgroundColor: "#ffffff",
+    width: "100%", // ሙሉ ስፋት እንዲይዝ
+    boxSizing: "border-box",
   },
   select: {
     padding: "14px 18px",
@@ -320,6 +320,8 @@ const styles = {
     fontSize: "1.1rem",
     backgroundColor: "#ffffff",
     color: "#1e293b",
+    width: "100%",
+    boxSizing: "border-box",
   },
   resultCard: {
     backgroundColor: "#1e293b",
@@ -348,7 +350,11 @@ const styles = {
     borderBottom: "1px solid #f1f5f9",
     paddingBottom: "8px",
   },
-  steelGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" },
+  steelGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", // ሞባይል ላይ እንዲታጠፍ
+    gap: "20px",
+  },
   steelItem: {
     backgroundColor: "#f0fdf4",
     padding: "20px",
@@ -371,8 +377,9 @@ const styles = {
     fontSize: "1rem",
     fontWeight: "600",
     color: "#334155",
+    gap: "10px", // በጽሁፎቹ መካከል ክፍተት እንዲኖር
   },
-  status: { fontWeight: "800" },
+  status: { fontWeight: "800", textAlign: "right" },
 };
 
 export default App;
