@@ -11,7 +11,7 @@ function App() {
     cover: 50,
     phi: 16,
     fyk: 500,
-    vsd: 450,
+    vsd: 50,
     col_a: 400, // Column width (mm) - ለPunching shear ያስፈልጋል
     col_b: 400, // Column depth (mm)
   });
