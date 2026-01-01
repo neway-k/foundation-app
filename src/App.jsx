@@ -69,6 +69,10 @@ function App() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (value === "") {
+      setInputs((prev) => ({ ...prev, [name]: "" }));
+      return;
+    }
     setInputs((prev) => ({ ...prev, [name]: Number(value) }));
   };
 
@@ -115,6 +119,7 @@ function App() {
                 name="msdx"
                 value={inputs.msdx}
                 onChange={handleChange}
+                onFocus={(e) => e.target.select()}
                 style={styles.inputBox}
               />
             </div>
