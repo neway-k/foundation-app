@@ -131,6 +131,7 @@ function App() {
                 name="b"
                 value={inputs.b}
                 onChange={handleChange}
+                onFocus={(e) => e.target.select()}
                 style={styles.inputBox}
               />
             </div>
@@ -142,6 +143,7 @@ function App() {
                 name="totalH"
                 value={inputs.totalH}
                 onChange={handleChange}
+                onFocus={(e) => e.target.select()}
                 style={styles.inputBox}
               />
             </div>
@@ -153,6 +155,7 @@ function App() {
                 name="vsd"
                 value={inputs.vsd}
                 onChange={handleChange}
+                onFocus={(e) => e.target.select()}
                 style={styles.inputBox}
               />
             </div>
@@ -165,6 +168,7 @@ function App() {
                   name="col_a"
                   value={inputs.col_a}
                   onChange={handleChange}
+                  onFocus={(e) => e.target.select()}
                   style={{ ...styles.inputBox, flex: 1, minWidth: "0" }}
                   placeholder="a"
                 />
@@ -173,6 +177,7 @@ function App() {
                   name="col_b"
                   value={inputs.col_b}
                   onChange={handleChange}
+                  onFocus={(e) => e.target.select()}
                   style={{ ...styles.inputBox, flex: 1, minWidth: "0" }}
                   placeholder="b"
                 />
