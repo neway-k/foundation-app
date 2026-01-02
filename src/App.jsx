@@ -112,7 +112,8 @@ function App() {
               <span
                 style={{ fontSize: "11px", color: "#64748b", marginTop: "4px" }}
               >
-                Design Strength (fcd): {(inputs.fck / 1.5).toFixed(2)} MPa
+                Design Strength (fcd): {((inputs.fck * 0.85) / 1.5).toFixed(2)}{" "}
+                MPa
               </span>
             </div>
 
