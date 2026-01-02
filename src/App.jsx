@@ -188,6 +188,79 @@ function App() {
                 />
               </div>
             </div>
+            {/* VISUALIZATION PANEL */}
+            <section style={styles.panel}>
+              <div style={styles.panelHeader}>
+                <span style={styles.icon}>📐</span>
+                <h2 style={styles.panelTitle}>Foundation Plot (Top View)</h2>
+              </div>
+
+              <div style={styles.plotContainer}>
+                <svg
+                  viewBox={`0 0 ${Math.max(inputs.l, inputs.b) + 600}`}
+                  style={{
+                    width: "100%",
+                    height: "350px",
+                    background: "#f8fafc",
+                    borderRadius: "15px",
+                    border: "1px solid #e2e8f0",
+                  }}
+                >
+                  {/* Foundation Footing */}
+                  <rect
+                    x="300"
+                    y="300"
+                    width={inputs.l}
+                    height={inputs.b}
+                    fill="#cbd5e1"
+                    stroke="#64748b"
+                    strokeWidth="15"
+                  />
+
+                  {/* Column (Middle) */}
+                  <rect
+                    x={300 + inputs.l / 2 - inputs.col_a / 2}
+                    y={300 + inputs.b / 2 - inputs.col_b / 2}
+                    width={inputs.col_a}
+                    height={inputs.col_b}
+                    fill="#0f172a"
+                  />
+
+                  {/* Labels */}
+                  <text
+                    x={300 + inputs.l / 2}
+                    y="260"
+                    textAnchor="middle"
+                    fill="#0f172a"
+                    fontWeight="bold"
+                    fontSize="120"
+                  >
+                    L = {inputs.l} mm
+                  </text>
+                  <text
+                    x="150"
+                    y={300 + inputs.b / 2}
+                    transform={`rotate(-90, 150, ${300 + inputs.b / 2})`}
+                    textAnchor="middle"
+                    fill="#0f172a"
+                    fontWeight="bold"
+                    fontSize="120"
+                  >
+                    B = {inputs.b} mm
+                  </text>
+                </svg>
+                <div
+                  style={{
+                    marginTop: "15px",
+                    fontSize: "0.9rem",
+                    color: "#64748b",
+                    fontStyle: "italic",
+                  }}
+                >
+                  * Dynamic scaled representation of your foundation
+                </div>
+              </div>
+            </section>
           </div>
         </section>
 
@@ -395,6 +468,14 @@ const styles = {
     gap: "10px", // በጽሁፎቹ መካከል ክፍተት እንዲኖር
   },
   status: { fontWeight: "800", textAlign: "right" },
+
+  // አዲስ የተጨመረ
+  plotContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 };
 
 export default App;
