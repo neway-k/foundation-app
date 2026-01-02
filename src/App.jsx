@@ -104,6 +104,10 @@ function App() {
                 <option value="20">C20/25</option>
                 <option value="25">C25/30</option>
                 <option value="30">C30/37</option>
+                <option value="35">C35/45</option>
+                <option value="40">C40/50</option>
+                <option value="45">C45/55</option>
+                <option value="50">C50/60</option>
               </select>
               <span
                 style={{ fontSize: "11px", color: "#64748b", marginTop: "4px" }}
